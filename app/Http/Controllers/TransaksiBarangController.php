@@ -131,7 +131,32 @@ class TransaksiBarangController extends Controller
 
             return redirect('/transaksi/');
         }
+        elseif ($total_harga_baru == $total_harga_lama) {
+            return redirect('/transaksi/');
+        }
         redirect('/transaksi');
     }
 
+    public function destroy($id)
+    {
+        $TransaksiBarang = TransaksiPembelianBarang::find($id);
+        $Transaksi = TransaksiPembelian::find($TransaksiBarang["transaksi_pembelian_id"]);
+
+        $total_harga = $TransaksiBarang["jumlah"] * $TransaksiBarang["harga_satuan"];
+        $totalHarga = $Transaksi["total_harga"] - $total_harga;
+
+        $transaksi_pembelian = [
+            "total_harga" => $totalHarga
+        ];
+
+        $Transaksi->update($transaksi_pembelian);
+        $TransaksiBarang->delete();
+
+        if ($Transaksi['total_harga'] == 0) {
+            $Transaksi->delete();
+        }
+
+        return redirect('/transaksi');
+
+}
 }
