@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Barang;
+use Illuminate\Support\Facades\Auth;
 
 class MasterBarangController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $barang = Barang::all();
@@ -28,7 +35,7 @@ class MasterBarangController extends Controller
             'nama_barang' => $request['nama_barang'],
             'harga_satuan' => $request['harga_satuan'],
         ]);
-        return redirect('MasterBarang.index');
+        return redirect('/barang');
     }
 
     public function show($id)

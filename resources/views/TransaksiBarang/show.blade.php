@@ -32,18 +32,8 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>No</th>
-                        <th>Nama Barang</th>
-                        <th>Harga Satuan</th>
-                        <th>Jumlah Barang</th>
-                        <th>Jumlah Harga Barang</th>
-                        <th>Waktu Dibuat</th>
-                        <th>Waktu Diupdate</th>
-                        <th>Aksi</th>
-                    </tr>
-                    <tr>
                         <td>Total Transaksi</td>
-                        <td colspan="7" align="center">{{$Transaksi->total_harga}}</td>
+                        <td colspan="7" align="center">{{ $Transaksi->total_harga }}</td>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -56,17 +46,14 @@
                             <td>{{ $key->harga_satuan * $key->jumlah }}</td>
                             <td>{{ $key->created_at }}</td>
                             <td>{{ $key->updated_at }}</td>
-                            <td class="text-center">
-                                <a href="/transaksi/{{$key->id}}/edit" class="btn btn-outline-primary"><i
-                                        class="far fa-edit"></i></a>
-
-                                <form action="/transaksi/{{$key->id}}" method="POST" class="display-non">
+                            <td>
+                                <a href="{{ route('transaksi.edit', $key->id) }}" class="btn btn-warning">Edit</a>
+                                <form action="{{ route('transaksi.destroy', $key->id) }}" method="post"
+                                    class="d-inline">
                                     @csrf
-                                    @method('DELETE')
-                                    <button input type="submit" class="btn btn-outline-danger my-1" value="Delete"><i
-                                            class="far fa-trash-alt"></i></button>
+                                    @method('delete')
+                                    <button class="btn btn-danger" type="submit">Delete</button>
                                 </form>
-                            </td>
                         </tr>
                         </tr>
                     @endforeach

@@ -9,6 +9,12 @@ use App\Models\Barang;
 
 class TransaksiBarangController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $Transaksi = TransaksiPembelian::all();

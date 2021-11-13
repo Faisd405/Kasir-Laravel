@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MasterBarangController;
 use App\Http\Controllers\TransaksiBarangController;
+use App\Http\Controllers\CrudUserController;
 use phpDocumentor\Reflection\Types\Resource_;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,12 +30,14 @@ Route::get('tes', function () {
     return view('tes/tes');
 });
 
-Route::resource('/barang', MasterBarangController::class);
-Route::resource('/transaksi', TransaksiBarangController::class);
-
 Auth::routes();
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::resource('/CrudUser', CrudUserController::class)->middleware('CekRole:admin');
+    Route::resource('/barang', MasterBarangController::class)->middleware('CekRole:admin');
+    Route::resource('/transaksi', TransaksiBarangController::class);
+
 });

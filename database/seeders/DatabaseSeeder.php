@@ -51,5 +51,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'faisd405@gmail.com',
             'password' => Hash::make('bogor123'),
         ]);
+        User::create([
+            'name' => 'FAIZAL DZULFIKAR DARMAWAN RUSLAN',
+            'role' => 'kasir',
+            'email' => 'faisd@gmail.com',
+            'password' => Hash::make('bogor123'),
+        ]);
+        //User
     }
 }

@@ -23,46 +23,49 @@
                 <h6 class="m-0 font-weight-bold text-primary">Barang</h6>
             </div>
             <div class="card-body">
-                <a href="barang/create">Tambah +</a>
+                <a href="CrudUser/create">Tambah +</a>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Barang</th>
-                                <th>Harga Satuan</th>
-                                <th>Waktu Dibuat</th>
-                                <th>Waktu Diperbarui</th>
-                                <th>Aksi</th>
+                                <th>Nama</th>
+                                <th>Role</th>
+                                <th>Email</th>
+                                <th>Dibikin</th>
+                                <th>Diperbarui</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Barang</th>
-                                <th>Harga Satuan</th>
-                                <th>Waktu Dibuat</th>
-                                <th>Waktu Diperbarui</th>
-                                <th>Aksi</th>
+                                <th>Nama</th>
+                                <th>Role</th>
+                                <th>Email</th>
+                                <th>Dibikin</th>
+                                <th>Diperbarui</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($barang as $item => $key)
+                            @foreach ($users as $item => $key)
                             <tr>
                                 <td>{{ $item + 1 }}</td>
-                                <td>{{ $key->nama_barang }}</td>
-                                <td>{{ $key->harga_satuan }}</td>
+                                <td>{{ $key->name }}</td>
+                                <td>{{ $key->role }}</td>
+                                <td>{{ $key->email }}</td>
                                 <td>{{ $key->created_at }}</td>
                                 <td>{{ $key->updated_at }}</td>
                                 <td>
-                                    <a href="barang/{{$key->id}}" class="btn btn-info">Show</a>
-                                    <a href="barang/{{ $key->id }}/edit" class="btn btn-warning">Edit</a>
-                                    <form action="barang/{{ $key->id }}" method="POST" class="d-inline">
-                                        @csrf
+                                    <a href="CrudUser/{{ $key->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="CrudUser/{{ $key->id }}" method="post" class="d-inline">
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

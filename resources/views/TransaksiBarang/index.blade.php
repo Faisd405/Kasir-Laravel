@@ -56,8 +56,7 @@
                                     <td>{{ $key->created_at }}</td>
                                     <td>{{ $key->updated_at }}</td>
                                     <td class="text-center">
-                                        <a href="/transaksi/{{$key->id}}" class="btn btn-outline-info"><i
-                                            class="fas fa-eye"></i></a>
+                                    <a href="transaksi/{{$key->id}}" class="btn btn-info">Cek Detail</a>
                                     </td>
                                 </tr>
                             @endforeach
