@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class MasterBarangController extends Controller
 {
@@ -68,5 +69,13 @@ class MasterBarangController extends Controller
         $barang = Barang::find($id);
         $barang->delete();
         return redirect('/barang');
+    }
+
+    public function barang_pdf()
+    {
+    	$barang = Barang::all();
+
+    	$pdf = PDF::loadview('MasterBarang.barang_pdf', compact('barang'));
+    	return $pdf->stream('laporan-Barang.pdf');
     }
 }

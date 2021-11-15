@@ -23,7 +23,9 @@
                 <h6 class="m-0 font-weight-bold text-primary">Transaksi Barang</h6>
             </div>
             <div class="card-body">
-                <a href="transaksi/create">Tambah +</a>
+                <a href="/transaksi/create" class="btn btn-primary" target="_blank">Tambah +</a>
+                <a href="/transaksi/transaksi_pdf" class="btn btn-primary" target="_blank">Cetak PDF</a>
+                <br>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

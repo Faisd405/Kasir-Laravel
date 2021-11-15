@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\TransaksiPembelianBarang;
 use App\Models\TransaksiPembelian;
 use App\Models\Barang;
+use PDF;
 
 class TransaksiBarangController extends Controller
 {
@@ -66,8 +67,7 @@ class TransaksiBarangController extends Controller
                 "harga_satuan" => $kapasitas["harga_satuan"]
             ]);
             return redirect('/transaksi');
-        }
-        elseif ($kapasitas["transaksi_pembelian_id"] > 1)  {
+        } elseif ($kapasitas["transaksi_pembelian_id"] > 1) {
             $transaksi_pembelian = TransaksiPembelian::find($kapasitas["transaksi_pembelian_id"]);
             $transaksi_pembelian->total_harga += $total_harga;
             $transaksi_pembelian->save();
@@ -125,9 +125,8 @@ class TransaksiBarangController extends Controller
             $cariTransaksiBarang->update($kapasitas);
 
             return redirect('/transaksi/');
-        }
-        elseif ($total_harga_baru < $total_harga_lama) {
-            $total_harga = $total_harga_lama - $total_harga_baru ;
+        } elseif ($total_harga_baru < $total_harga_lama) {
+            $total_harga = $total_harga_lama - $total_harga_baru;
             $totalHarga = ($TransaksiP['total_harga'] - $total_harga);
             $transaksi_pembelian = [
                 "total_harga" => $totalHarga
@@ -136,8 +135,7 @@ class TransaksiBarangController extends Controller
             $cariTransaksiBarang->update($kapasitas);
 
             return redirect('/transaksi/');
-        }
-        elseif ($total_harga_baru == $total_harga_lama) {
+        } elseif ($total_harga_baru == $total_harga_lama) {
             return redirect('/transaksi/');
         }
         redirect('/transaksi');
@@ -163,6 +161,20 @@ class TransaksiBarangController extends Controller
         }
 
         return redirect('/transaksi');
+    }
+    public function transaksi_pdf()
+    {
+    	$transaksi = TransaksiPembelian::all();
 
-}
+    	$pdf = PDF::loadview('TransaksiBarang.transaksi_pdf', compact('transaksi'));
+    	return $pdf->stream('laporan-transaksi.pdf');
+    }
+    public function transaksibarang_pdf($id)
+    {
+        $Transaksi = TransaksiPembelian::find($id);
+
+    	$pdf = PDF::loadview('TransaksiBarang.transaksibarang_pdf', compact('Transaksi'));
+    	return $pdf->stream('laporan-transaksibarang.pdf');
+    }
+
 }

@@ -36,8 +36,16 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+    // CRUD User
     Route::resource('/CrudUser', CrudUserController::class)->middleware('CekRole:admin');
+
+    //Barang
+    Route::get('/barang/barang_pdf', [MasterBarangController::class, 'barang_pdf'])->name('barang_pdf');
     Route::resource('/barang', MasterBarangController::class)->middleware('CekRole:admin');
+
+    //Transaksi
+    Route::get('/transaksi/transaksibarang_pdf/{id}', [TransaksiBarangController::class, 'transaksibarang_pdf'])->name('transaksibarang_pdf');
+    Route::get('/transaksi/transaksi_pdf', [TransaksiBarangController::class, 'transaksi_pdf'])->name('transaksi_pdf');
     Route::resource('/transaksi', TransaksiBarangController::class);
 
 });

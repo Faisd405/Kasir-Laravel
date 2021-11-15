@@ -23,7 +23,9 @@
                 <h6 class="m-0 font-weight-bold text-primary">Barang</h6>
             </div>
             <div class="card-body">
-                <a href="barang/create">Tambah +</a>
+                <a href="/barang/create" class="btn btn-primary" target="_blank">Tambah +</a>
+                <a href="/barang/barang_pdf" class="btn btn-primary" target="_blank">Cetak PDF</a>
+                <br>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -63,6 +65,7 @@
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Hapus</button>
                                     </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

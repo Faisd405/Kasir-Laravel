@@ -16,6 +16,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Show Barang</h6>
         </div>
         <div class="card-body">
+            <a href="/transaksi/transaksibarang_pdf/{{$Transaksi->id}}" class="btn btn-primary" target="_blank" >Cetak PDF</a>
             <h2 align="center">ID Transaksi {{ $Transaksi->id }}</h2>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
